@@ -1,0 +1,32 @@
+{
+    "name": "fluid-slider-vanilla",
+    "version": "1.0.0",
+    "description": "3D 流体滑块进度条组件 - 纯前端实现",
+    "main": "src/index.html",
+    "scripts": {
+      "dev": "live-server src --port=8080 --open=/index.html",
+      "start": "npm run dev"
+    },
+    "keywords": [
+      "slider",
+      "progress-bar",
+      "fluid",
+      "3d",
+      "animation",
+      "canvas"
+    ],
+    "author": "Antigravity AI",
+    "license": "MIT",
+    "devDependencies": {
+      "live-server": "^1.2.2"
+    },
+    "repository": {
+      "type": "git",
+      "url": ""
+    },
+    "bugs": {
+      "url": ""
+    },
+    "homepage": ""
+}
+  

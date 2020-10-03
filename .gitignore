@@ -1,0 +1,29 @@
+# Dependencies and generated output (all subprojects)
+node_modules/
+dist/
+build/
+coverage/
+.vite/
+.cache/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini

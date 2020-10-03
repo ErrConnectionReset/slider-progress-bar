@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js Fluid Slider</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            /* Light background as per target style implying clean UI */
+        }
+
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #ui-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ui-container">
+        <h1>Fluid Slider 3D</h1>
+        <p>Drag to interact</p>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

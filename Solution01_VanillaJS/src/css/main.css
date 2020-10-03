@@ -1,0 +1,397 @@
+/* 主页面样式 */
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    padding: 50px 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    max-width: 800px;
+    width: 100%;
+    /* animation属性移除 - 不再有幽灵动画! */
+}
+
+/* 旧的基类fade-in已删除,替换为state-init */
+
+h1 {
+    font-size: 42px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+#fluid-slider {
+    margin: 40px 0;
+}
+
+.instruction {
+    margin-top: 30px;
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.instruction strong {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.info-box {
+    margin-top: 25px;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.info-box p {
+    margin: 0;
+    color: #555;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#progress-value {
+    color: #667eea;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+/* ========== 状态驱动的动画类 ========== */
+/* 每个状态类只负责一个明确的视觉效果,避免animation冲突 */
+
+/* 初始加载状态 */
+.state-init {
+    animation: init-fade-in 0.6s ease-out forwards;
+}
+
+@keyframes init-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 100%完成脉冲状态 */
+.state-pulse {
+    animation: pulse-scale 0.6s ease-in-out;
+}
+
+@keyframes pulse-scale {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* 离开当前页状态 (淡出) */
+.state-leaving {
+    animation: leave-fade-out 0.4s ease-out forwards;
+}
+
+@keyframes leave-fade-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* 进入新页状态 (淡入) */
+.state-entering {
+    animation: enter-fade-in 0.4s ease-out forwards;
+}
+
+@keyframes enter-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 粒子效果容器 */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: particle-burst 1s ease-out forwards;
+}
+
+@keyframes particle-burst {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* 彩虹扫过效果 */
+.rainbow-sweep {
+    animation: rainbow-hue 1s linear;
+}
+
+@keyframes rainbow-hue {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+
+    50% {
+        filter: hue-rotate(180deg) brightness(1.2);
+    }
+
+    100% {
+        filter: hue-rotate(360deg) brightness(1);
+    }
+}
+
+/* ========== 成功页面样式 ========== */
+
+.success-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+    background: linear-gradient(135deg, #52c234 0%, #34a853 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    animation: scale-bounce 0.8s ease-out;
+    box-shadow: 0 10px 30px rgba(52, 168, 83, 0.3);
+}
+
+@keyframes scale-bounce {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    70% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.checkmark-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.checkmark {
+    animation: checkmark-draw 0.5s ease-out 0.3s forwards;
+    opacity: 0;
+}
+
+@keyframes checkmark-draw {
+    to {
+        opacity: 1;
+    }
+}
+
+.success-message {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.success-detail {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 35px;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.back-button,
+.view-button {
+    display: inline-block;
+    padding: 14px 35px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.back-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.view-button {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.view-button:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 25px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .instruction {
+        font-size: 14px;
+    }
+
+    .info-box p {
+        font-size: 16px;
+    }
+
+    #progress-value {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+        margin-bottom: 30px;
+    }
+
+    #fluid-slider {
+        margin: 30px 0;
+    }
+
+    .instruction {
+        font-size: 13px;
+        margin-top: 25px;
+    }
+
+    .info-box {
+        padding: 12px 20px;
+    }
+
+    .info-box p {
+        font-size: 15px;
+    }
+}
+
+/* 平板设备 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 45px 35px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+}
+
+/* 打印样式 */
+@media print {
+    body {
+        background: white;
+    }
+
+    .container {
+        box-shadow: none;
+    }
+
+    .particles-container {
+        display: none;
+    }
+}

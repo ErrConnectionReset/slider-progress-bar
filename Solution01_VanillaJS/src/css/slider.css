@@ -1,0 +1,148 @@
+/* 流体滑块核心样式 - 优化版 v3.1 */
+
+.fluid-slider {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 100px;
+    margin: 0 auto;
+    touch-action: none;
+}
+
+/* 滑轨 - 增强凹陷效果 */
+.slider-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #d0d0d0 0%, #f2f2f2 50%, #e0e0e0 100%);
+    border-radius: 50px;
+    /* 增强内阴影,更明显的凹陷感 */
+    box-shadow:
+        inset 0 6px 12px rgba(0, 0, 0, 0.28),
+        inset 0 -4px 10px rgba(255, 255, 255, 1),
+        0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* SVG 容器 */
+.fluid-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* 流体主体 - 增强3D效果 */
+.fluid-main {
+    /* 多层阴影增加立体感 */
+    filter:
+        drop-shadow(0 2px 4px rgba(255, 140, 0, 0.4)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2)) drop-shadow(0 1px 2px rgba(255, 200, 100, 0.6));
+}
+
+/* 流体高光层 - 增强半透明感 */
+.fluid-highlight {
+    opacity: 0.8;
+    mix-blend-mode: screen;
+    /* 叠加模式增强高光 */
+}
+
+/* 百分比文字 */
+.percentage-text {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    font-weight: 600;
+    color: #888;
+    z-index: 10;
+    text-shadow:
+        0 1px 3px rgba(255, 255, 255, 1),
+        0 0 12px rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    user-select: none;
+}
+
+/* 进度接近100%时文字变色 */
+.percentage-text.near-complete {
+    color: #FF6600;
+    text-shadow:
+        0 1px 4px rgba(255, 255, 255, 1),
+        0 0 18px rgba(255, 200, 0, 0.9),
+        0 0 25px rgba(255, 140, 0, 0.6);
+}
+
+/* 拖动热区 */
+.drag-hotspot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    z-index: 5;
+}
+
+.drag-hotspot:active,
+.drag-hotspot.dragging {
+    cursor: grabbing;
+}
+
+/* 完成状态动画 - 增强效果 */
+.fluid-slider.completed .fluid-main {
+    animation: fluid-pulse 0.6s ease-in-out;
+}
+
+@keyframes fluid-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        filter:
+            drop-shadow(0 2px 4px rgba(255, 140, 0, 0.4)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2)) drop-shadow(0 1px 2px rgba(255, 200, 100, 0.6));
+    }
+
+    50% {
+        opacity: 0.85;
+        filter:
+            drop-shadow(0 3px 6px rgba(255, 140, 0, 0.6)) drop-shadow(0 6px 15px rgba(0, 0, 0, 0.3)) drop-shadow(0 2px 4px rgba(255, 200, 100, 0.8)) brightness(1.15);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .fluid-slider {
+        max-width: 90%;
+        height: 70px;
+    }
+
+    .percentage-text {
+        font-size: 24px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .fluid-slider {
+        height: 60px;
+    }
+
+    .percentage-text {
+        font-size: 20px;
+        right: 15px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .fluid-slider {
+        max-width: 70%;
+        height: 80px;
+    }
+
+    .percentage-text {
+        font-size: 28px;
+    }
+}
